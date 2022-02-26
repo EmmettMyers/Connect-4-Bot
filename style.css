@@ -1,0 +1,178 @@
+body {
+  background-color: darksalmon;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#homeCircle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 720px;
+  height: 720px;
+  background-color: lightgreen;
+  border-radius: 50%;
+  border: 2px solid darkgreen;
+}
+#emmett {
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  font-size: 30px;
+  color: dimgrey;
+  top: 90px;
+  margin-bottom: 0px;
+}
+#title {
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  font-size: 100px;
+  top: 0px;
+  margin-bottom: 15px;
+}
+.homeButton {
+  display: flex;
+  justify-content: center;
+}
+.homeButton a {
+  font-size: 30px;
+  color: white;
+  border: white 1px solid;
+  text-align: center;
+  text-decoration: none;
+}
+#local {
+  padding: 50px;
+  line-height: 45px;
+}
+#bots {
+  display: flex;
+  flex-direction: column;
+}
+#bots a {
+  padding: 20px;
+}
+#local { background-color: firebrick; }
+#local:hover { background-color: maroon; }
+#bot1 { background-color: rgb(0, 166, 255); }
+#bot1:hover { background-color: rgb(0, 119, 184); }
+#bot2 { background-color: rgb(0, 60, 255); }
+#bot2:hover { background-color: rgb(0, 43, 184); }
+#bot3 { background-color: darkblue; }
+#bot3:hover { background-color: rgb(0, 5, 69); }
+#winBack {
+  display: none;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  height: 600px;
+  width: 800px;
+  background-color: black;
+  z-index: 1;
+  opacity: .8;
+}
+#playAgain {
+  display: none;
+  position: absolute;
+  font-size: 30px;
+  padding: 40px;
+  font-weight: bold;
+  color: white;
+  border: white 1px solid;
+  background-color: darkgreen;
+  left: 50%;
+  top: 65%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+#playAgain:hover {
+  background-color: green;
+  cursor: pointer;
+}
+#won {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 25%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  text-align:center;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+}
+.scoreboard {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+}
+#redWins {
+  margin-top: -41px;
+  border: 2px red solid;
+  background-color: rgb(252, 141, 141);
+  padding: 5px;
+}
+#yellowWins {
+  margin-top: -41px;
+  margin-left: 500px;
+  border: 2px rgb(237, 231, 0) solid;
+  background-color: rgb(255, 253, 179);
+  padding: 5px;
+}
+#yW, #rW {
+  font-weight: bold;
+}
+#all {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  display: inline-block;
+  height: 600px;
+  width: 800px;
+  background-color: white;
+  border: 3px navy solid;
+}
+.chip {
+  position: absolute;
+  margin: auto;
+  height: 90px;
+  width: 90px;
+  border-radius: 50%;
+}
+#board {
+  position: absolute;
+  width: 800px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.exit {
+  position: absolute;
+  width: 4vw;
+  left: 20px;
+}
+#over:hover {
+  opacity: 0;
+}
+#r0, #r1, #r2, #r3, #r4, #r5, #r6 {
+  position: absolute;
+  width: 90px;
+  height: 600px;
+  cursor: pointer;
+}
+#r0 { left: 18px; }
+#r1 { left: 129px; }
+#r2 { left: 242px; }
+#r3 { left: 355px; }
+#r4 { left: 468px; }
+#r5 { left: 580px; }
+#r6 { left: 692px; }

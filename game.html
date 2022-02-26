@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Emmett's Connect 4</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="/photos/logo1.png">
+  </head>
+  <body>
+
+    <img src="/photos/arrowH.png" class="exit">
+    <a id="exitOverlay" href="index.html">
+      <img src="/photos/arrow.png" class="exit" id="over">
+    </a>
+
+    <div id="all">
+      <div class="scoreboard">
+        <p id="redWins"><span id="name1">Red</span> Wins: <span id="rW">0</span></p>
+        <p id="yellowWins"><span id="name2">Yellow</span> Wins: <span id="yW">0</span></p>
+      </div>
+      <div id="winShow">
+        <p id="won"><span id="winner"></span></p>
+        <div id="playAgain" onclick="restart()">Play Again</div>
+      </div>
+      <div id="winBack">
+      </div>
+      <div class="chip" id="guide" style="top: 0px; left: 0px; opacity: 0.25; display: none; background-color: red;"></div>
+      <img src="/photos/board.png" id="board">
+      <div id="r0" onmouseover="guideIn(0)" onmouseout="guideOut()" onclick="place(0, true)"></div>
+      <div id="r1" onmouseover="guideIn(1)" onmouseout="guideOut()" onclick="place(1, true)"></div>
+      <div id="r2" onmouseover="guideIn(2)" onmouseout="guideOut()" onclick="place(2, true)"></div>
+      <div id="r3" onmouseover="guideIn(3)" onmouseout="guideOut()" onclick="place(3, true)"></div>
+      <div id="r4" onmouseover="guideIn(4)" onmouseout="guideOut()" onclick="place(4, true)"></div>
+      <div id="r5" onmouseover="guideIn(5)" onmouseout="guideOut()" onclick="place(5, true)"></div>
+      <div id="r6" onmouseover="guideIn(6)" onmouseout="guideOut()" onclick="place(6, true)"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

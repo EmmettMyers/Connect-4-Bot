@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Emmett's Connect 4</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="/photos/logo1.png">
+  </head>
+  <body>
+    <div id="homeCircle">
+      <p id="emmett">Emmett's</p>
+      <p id="title">Connect 4</p>
+      <div class="homeButton">
+        <a id="local" onclick="setGame(1)" href="game.html"><br>Play Local</a>
+        <div id="bots">
+          <a id="bot1" onclick="setGame(2)" href="game.html">Play Easy Bot</a>
+          <a id="bot2" onclick="setGame(3)" href="game.html">Play Normal Bot</a>
+          <a id="bot3" onclick="setGame(4)" href="game.html">Play Hard Bot</a>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
