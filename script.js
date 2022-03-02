@@ -9,7 +9,7 @@ let b = [ [0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0],
           [0, 0, 0, 0, 0, 0, 0] ]; 
 
-function place(column, repeat){ 
+function place(column, repeat){
   if (gameOver) return;
   var color = 'gold'; 
   var team = 1; 
@@ -33,6 +33,7 @@ function place(column, repeat){
 }
 
 function restart(){
+  redWon = false;
   gameOver = false;
   count = 0;
   colNum = [0, 0, 0, 0, 0, 0, 0];
@@ -58,6 +59,9 @@ let redWon = false;
 function checkWin(repeat){
   for (var r = 0; r <= 5; r++){
     for (var c = 0; c <= 6; c++){
+      /*if (r <= 2 && b[r][c]==1 && b[r+1][c]==1 && b[r+2][c]==1 && b[r+3][c]==1){
+        alert("dab");
+      }*/
       if ( (c <= 3 && ( (b[r][c]==2 && b[r][c+1]==2 && b[r][c+2]==2 && b[r][c+3]==2) || (b[r][c]==1 && b[r][c+1]==1 && b[r][c+2]==1 && b[r][c+3]==1) ) ) || ( r <= 2 && ( (b[r][c]==2 && b[r+1][c]==2 && b[r+2][c]==2 && b[r+3][c]==2) || (b[r][c]==1 && b[r+1][c]==1 && b[r+2][c]==1 && b[r+3][c]==1) ) ) || ( r <= 2 && c <= 3 && ( (b[r][c]==2 && b[r+1][c+1]==2 && b[r+2][c+2]==2 && b[r+3][c+3]==2) || (b[r][c]==1 && b[r+1][c+1]==1 && b[r+2][c+2]==1 && b[r+3][c+3]==1) ) ) || ( r <= 2 && c >= 3 && ( (b[r][c]==2 && b[r+1][c-1]==2 && b[r+2][c-2]==2 && b[r+3][c-3]==2) || (b[r][c]==1 && b[r+1][c-1]==1 && b[r+2][c-2]==1 && b[r+3][c-3]==1) ) ) ){
         gameOver = true;
         document.getElementById("won").style.display = "block";
@@ -75,8 +79,9 @@ function checkWin(repeat){
             document.getElementById("yW").innerHTML = yWins;
             document.getElementById("winner").innerHTML = "Bot<br>Won!";
           }
-          else
+          else {
             redWon = false;
+          }
         }
         else {
           if (count % 2 != 0){
@@ -164,8 +169,8 @@ function botMove(){
       place(bWin(b), false);
     else if (normVision > 2 && bDefend(b) != -1)
       place(bDefend(b), false);
-    else if (normVision > 6 && double(b,2) != -1)
-      place(double(b,2), false);
+    else if (normVision > 6 && doubleDef(b) != -1)
+      place(doubleDef(b), false);
     else {
       var stay = true;
       do {
@@ -177,69 +182,105 @@ function botMove(){
       } while (stay);
     }
   }
-  else if (bWin(b) != -1)
+  else if (bWin(b) != -1){
     place(bWin(b), false);
-  else if (bDefend(b) != -1)
+  }
+  else if (bDefend(b) != -1){
     place(bDefend(b), false);
-  else if (double(b,1) != -1)
-    place(double(b,1), false);
-  else if (double(b,2) != -1)
-    place(double(b,2), false);
+  }
+  else if (doubleWin(b) != -1){
+    //alert("double win");
+    place(doubleWin(b), false);
+  }
+  else if (doubleDef(b) != -1){
+    //alert("double def");
+    place(doubleDef(b), false);
+  }
   else {
+    var bTest = [];
+    var firstPlaced = false;
     for (var c = 0; c <= 6; c++){
-      var bTest = [];
+      // error in here i think
       bTest = copyArray(b);
       if (colNum[c]+1 <= 6){
         bTest[5-colNum[c]][c] = 1;
-        if (bWin(bTest) != -1 && bDefend(bTest) == -1 && double(bTest,2) == -1){
+        if (bWin(bTest) != -1 && bDefend(bTest) == -1){ // && doubleDef(bTest) == -1
           place(c, false);
-          return;
+          firstPlaced = true;
+          break;
         }
       }
     }
-    var stay = true;
-    do {
-      var bTest = [];
-      bTest = copyArray(b);
-      var rand = Math.floor(Math.random() * 7);
-      if (colNum[rand]+1 <= 6){
-        bTest[5-colNum[rand]][rand] = 1;
-        if (bDefend(bTest) == -1 && double(bTest,2) == -1){
-          place(rand, false);
-          stay = false;
+    if (!firstPlaced){
+      var stay = 0;
+      while (stay <= 10) {
+        bTest = copyArray(b);
+        var rand = Math.floor(Math.random() * 3 + 2);
+        if (colNum[rand]+1 <= 6){
+          bTest[5-colNum[rand]][rand] = 1;
+          if (bDefend(bTest) == -1){  // && doubleDef(bTest) == -1
+            place(rand, false);
+            stay = 20;
+          }
+        }
+        stay++;
+      }
+      if (stay < 20){
+        while (stay >= 0) {
+          bTest = copyArray(b);
+          var randArr = [0, 1, 5, 6];
+          var randInt = Math.floor(Math.random() * 4);
+          var rand = randArr[randInt];
+          if (colNum[rand]+1 <= 6){
+            bTest[5-colNum[rand]][rand] = 1;
+            if (bDefend(bTest) == -1){  // && doubleDef(bTest) == -1
+              place(rand, false);
+              stay = -10;
+            }
+          }
+          stay++;
         }
       }
-    } while (stay);
+    }
   }
 }
 
-function double(bo, team){
-  for (var c1 = 0; c1 <= 6; c1++){
+function doubleWin(bo){
+  for (var c = 0; c <= 6; c++){
     var dTest1 = [];
     dTest1 = copyArray(bo);
-    if (colNum[c1]+1 <= 6){
-      dTest1[5-colNum[c1]][c1] = 2;
-      colNum[c1]++;
-      var winAreas = 0;
-      for (var c2 = 0; c2 <= 6; c2++){
-        var dTest2 = [];
-        dTest2 = copyArray(dTest1);
-        if (colNum[c2]+1 <= 6){
-          dTest2[5-colNum[c2]][c2] = 2;
-          for (var r = 0; r <= 5; r++){
-            for (var c = 0; c <= 6; c++){
-              if ( team == 1 && (c <= 3 && (dTest2[r][c]==2 && dTest2[r][c+1]==2 && dTest2[r][c+2]==2 && dTest2[r][c+3]==2) ) || ( r <= 2 && (dTest2[r][c]==2 && dTest2[r+1][c]==2 && dTest2[r+2][c]==2 && dTest2[r+3][c]==2) ) || ( r <= 2 && c <= 3 && (dTest2[r][c]==2 && dTest2[r+1][c+1]==2 && dTest2[r+2][c+2]==2 && dTest2[r+3][c+3]==2) ) || ( r <= 2 && c >= 3 && (dTest2[r][c]==2 && dTest2[r+1][c-1]==2 && dTest2[r+2][c-2]==2 && dTest2[r+3][c-3]==2) ) )
-                winAreas++;
-              else if ( team == 1 && (c <= 3 && (dTest2[r][c]==1 && dTest2[r][c+1]==1 && dTest2[r][c+2]==1 && dTest2[r][c+3]==1) ) || ( r <= 2 && (dTest2[r][c]==1 && dTest2[r+1][c]==1 && dTest2[r+2][c]==1 && dTest2[r+3][c]==1) ) || ( r <= 2 && c <= 3 && (dTest2[r][c]==1 && dTest2[r+1][c+1]==1 && dTest2[r+2][c+2]==1 && dTest2[r+3][c+3]==1) ) || ( r <= 2 && c >= 3 && (dTest2[r][c]==1 && dTest2[r+1][c-1]==1 && dTest2[r+2][c-2]==1 && dTest2[r+3][c-3]==1) ) )
-                winAreas++;
-            }
-          }
+    if (colNum[c]+1 <= 6){
+      dTest1[5-colNum[c]][c] = 1;
+      colNum[c]++;
+      if (bWin(dTest1) != -1 && bDefend(dTest1) == -1){
+        dTest1[5-colNum[bWin(dTest1)]][bWin(dTest1)] = 2;
+        if (bWin(dTest1) != -1 && colNum[c]+1 <= 6){
+          colNum[c]--;
+          return c;
         }
       }
-      colNum[c1]--;
-      if (winAreas > 1)
-        return c1;
     }
+    colNum[c]--;
+  }
+  return -1;
+}
+
+function doubleDef(bo){
+  for (var c = 0; c <= 6; c++){
+    var dTest1 = [];
+    dTest1 = copyArray(bo);
+    if (colNum[c]+1 <= 6){
+      dTest1[5-colNum[c]][c] = 2;
+      colNum[c]++;
+      if (bDefend(dTest1) != -1){
+        dTest1[5-colNum[bDefend(dTest1)]][bDefend(dTest1)] = 1;
+        if (bDefend(dTest1) != -1 && colNum[c]+1 <= 6){
+          colNum[c]--;
+          return c;
+        }
+      }
+    }
+    colNum[c]--;
   }
   return -1;
 }
@@ -277,7 +318,7 @@ function bWin(bo){
           else if (bo[r+1][c+1] == 0 && bo[r+2][c+1] != 0) return c+1;
           else if (bo[r+2][c+2] == 0 && bo[r+3][c+2] != 0) return c+2;
           else if (r < 2 && bo[r+3][c+3] == 0 && bo[r+4][c+3] != 0) return c+3;
-          else if (bo[r+3][c+3] == 0) return c+3;
+          else if (r == 2 && bo[r+3][c+3] == 0) return c+3;
         }
       }
       if (r >= 3 && c <= 3){
