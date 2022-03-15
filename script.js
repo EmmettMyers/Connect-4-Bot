@@ -17,11 +17,10 @@ function place(column, repeat){
     color = 'red'; 
     team = 2;
   }
-  var rowLimiter = colNum[column];
-  b[5-colNum[column]][column] = team;
-  colNum[column]++;
-  if (rowLimiter <= 6){
-    var height = 507 - (100 * rowLimiter);
+  if (colNum[column] < 6){
+    var height = 507 - (100 * colNum[column]);
+    b[5-colNum[column]][column] = team;
+    colNum[column]++;
     count++;
     document.querySelector('#r' + column).insertAdjacentHTML('afterbegin',`
     <div class="chip" style="top: ` + height + `px; background-color: ` + color + `"></div>
