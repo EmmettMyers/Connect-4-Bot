@@ -58,9 +58,6 @@ let redWon = false;
 function checkWin(repeat){
   for (var r = 0; r <= 5; r++){
     for (var c = 0; c <= 6; c++){
-      /*if (r <= 2 && b[r][c]==1 && b[r+1][c]==1 && b[r+2][c]==1 && b[r+3][c]==1){
-        alert("dab");
-      }*/
       if ( (c <= 3 && ( (b[r][c]==2 && b[r][c+1]==2 && b[r][c+2]==2 && b[r][c+3]==2) || (b[r][c]==1 && b[r][c+1]==1 && b[r][c+2]==1 && b[r][c+3]==1) ) ) || ( r <= 2 && ( (b[r][c]==2 && b[r+1][c]==2 && b[r+2][c]==2 && b[r+3][c]==2) || (b[r][c]==1 && b[r+1][c]==1 && b[r+2][c]==1 && b[r+3][c]==1) ) ) || ( r <= 2 && c <= 3 && ( (b[r][c]==2 && b[r+1][c+1]==2 && b[r+2][c+2]==2 && b[r+3][c+3]==2) || (b[r][c]==1 && b[r+1][c+1]==1 && b[r+2][c+2]==1 && b[r+3][c+3]==1) ) ) || ( r <= 2 && c >= 3 && ( (b[r][c]==2 && b[r+1][c-1]==2 && b[r+2][c-2]==2 && b[r+3][c-3]==2) || (b[r][c]==1 && b[r+1][c-1]==1 && b[r+2][c-2]==1 && b[r+3][c-3]==1) ) ) ){
         gameOver = true;
         document.getElementById("won").style.display = "block";
@@ -181,32 +178,25 @@ function botMove(){
       } while (stay);
     }
   }
-  else if (bWin(b) != -1){
+  else if (bWin(b) != -1)
     place(bWin(b), false);
-  }
-  else if (bDefend(b) != -1){
+  else if (bDefend(b) != -1)
     place(bDefend(b), false);
-  }
-  else if (doubleWin(b) != -1){
-    //alert("double win");
+  else if (doubleWin(b) != -1)
     place(doubleWin(b), false);
-  }
-  else if (doubleDef(b) != -1){
-    //alert("double def");
+  else if (doubleDef(b) != -1)
     place(doubleDef(b), false);
-  }
   else {
     var bTest = [];
     var firstPlaced = false;
     for (var c = 0; c <= 6; c++){
-      // error in here i think
       bTest = copyArray(b);
-      if (colNum[c]+1 <= 6){
+      if (colNum[c] < 6){
         bTest[5-colNum[c]][c] = 1;
         if (bWin(bTest) != -1 && bDefend(bTest) == -1){ // && doubleDef(bTest) == -1
           place(c, false);
           firstPlaced = true;
-          break;
+          c = 7;
         }
       }
     }
@@ -215,7 +205,7 @@ function botMove(){
       while (stay <= 10) {
         bTest = copyArray(b);
         var rand = Math.floor(Math.random() * 3 + 2);
-        if (colNum[rand]+1 <= 6){
+        if (colNum[rand] < 6){
           bTest[5-colNum[rand]][rand] = 1;
           if (bDefend(bTest) == -1){  // && doubleDef(bTest) == -1
             place(rand, false);
@@ -230,7 +220,7 @@ function botMove(){
           var randArr = [0, 1, 5, 6];
           var randInt = Math.floor(Math.random() * 4);
           var rand = randArr[randInt];
-          if (colNum[rand]+1 <= 6){
+          if (colNum[rand] < 6){
             bTest[5-colNum[rand]][rand] = 1;
             if (bDefend(bTest) == -1){  // && doubleDef(bTest) == -1
               place(rand, false);
@@ -248,18 +238,18 @@ function doubleWin(bo){
   for (var c = 0; c <= 6; c++){
     var dTest1 = [];
     dTest1 = copyArray(bo);
-    if (colNum[c]+1 <= 6){
+    if (colNum[c] < 6){
       dTest1[5-colNum[c]][c] = 1;
       colNum[c]++;
       if (bWin(dTest1) != -1 && bDefend(dTest1) == -1){
         dTest1[5-colNum[bWin(dTest1)]][bWin(dTest1)] = 2;
-        if (bWin(dTest1) != -1 && colNum[c]+1 <= 6){
+        if (bWin(dTest1) != -1 && colNum[c] < 6){
           colNum[c]--;
           return c;
         }
       }
+      colNum[c]--;
     }
-    colNum[c]--;
   }
   return -1;
 }
@@ -268,18 +258,18 @@ function doubleDef(bo){
   for (var c = 0; c <= 6; c++){
     var dTest1 = [];
     dTest1 = copyArray(bo);
-    if (colNum[c]+1 <= 6){
+    if (colNum[c] < 6){
       dTest1[5-colNum[c]][c] = 2;
       colNum[c]++;
       if (bDefend(dTest1) != -1){
         dTest1[5-colNum[bDefend(dTest1)]][bDefend(dTest1)] = 1;
-        if (bDefend(dTest1) != -1 && colNum[c]+1 <= 6){
+        if (bDefend(dTest1) != -1 && colNum[c] < 6){
           colNum[c]--;
           return c;
         }
       }
+      colNum[c]--;
     }
-    colNum[c]--;
   }
   return -1;
 }
