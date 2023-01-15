@@ -2,7 +2,7 @@
 
 URL: https://emmetts-connect-4.emmettleemyers.repl.co/
 
-Created in Senior year of high school, Emmett's Connect 4 includes:
+Created in my Senior year of high school, Emmett's Connect 4 includes:
  - Four game modes (local, easy bot, normal bot, hard bot)
  - Win tracking for each player with a scoreboard above the gameboard
  - Bot game strategies based on predictions up to three rounds in the future
