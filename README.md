@@ -1,12 +1,13 @@
 # Connect-4-Bot
 
-URL: https://emmetts-connect-4.emmettleemyers.repl.co/
+[Play Now](https://emmetts-connect-4.emmettleemyers.repl.co/)&nbsp;&nbsp;|&nbsp;&nbsp;<i>Created: Summer 2021 (Incoming High School Senior)</i>
 
-Created in my Senior year of high school, Emmett's Connect 4 includes:
- - Four game modes (local, easy bot, normal bot, hard bot)
- - Win tracking for each player with a scoreboard above the gameboard
+<b>Emmett's Connect 4 is an advanced, comprehensive Connect 4 player that includes:</b>
+ - 3 Bot difficulties with different play styles: Easy, Medium, Hard
  - Bot game strategies based on predictions up to three rounds in the future
- - Hard bot intelligence that always detects win/loss scenarios, as well as potential double win/double loss scenarios in the future that it takes advantage of
+ - Hard bot intelligence that always detects win/loss scenarios, as well as potential double win/double loss scenarios in the future
+ - Take-turns style local play mode
+ - Win tracking for each player with a scoreboard above the gameboard
 
 Tools used:
  - JavaScript
