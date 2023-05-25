@@ -1,4 +1,4 @@
-# Connect-4-Bot
+# Connect 4 Bot
 
 [Play Now](https://emmetts-connect-4.emmettleemyers.repl.co/)&nbsp;&nbsp;|&nbsp;&nbsp;<i>Created: Summer 2021 (Incoming High School Senior)</i>
 
