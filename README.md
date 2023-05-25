@@ -13,7 +13,7 @@
  - Take-turns style local play mode
  - Win tracking for each player with a scoreboard above the gameboard
 
-Tools used:
+  <b>Tools used:</b>
  - JavaScript
  - CSS
  - HTML
