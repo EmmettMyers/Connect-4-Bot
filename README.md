@@ -2,8 +2,8 @@
 
 [Play Now](https://emmetts-connect-4.emmettleemyers.repl.co/)&nbsp;&nbsp;|&nbsp;&nbsp;<i>Created: Summer 2021 (Incoming High School Senior)</i>
 
-<img src="photos/connect 4 1.png" style="width: 500px" />
 <img src="photos/connect 4 2.png" style="width: 500px" />
+<img src="photos/connect 4 1.png" style="width: 500px" />
 
 <b>Emmett's Connect 4 is an advanced, comprehensive Connect 4 player that includes:</b>
  - 3 Bot difficulties with different play styles: Easy, Medium, Hard
