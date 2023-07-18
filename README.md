@@ -3,8 +3,8 @@
 [Play Now](https://emmetts-connect-4.emmettleemyers.repl.co/)&nbsp;&nbsp;|&nbsp;&nbsp;<i>Created: Summer 2021 (Incoming High School Senior)</i>
 
 <div style="display: flex; justify-content: center">
- <img src="photos/connect 4 2.png" style="width: 500px" />
- <img src="photos/connect 4 1.png" style="width: 500px" />
+ <img src="photos/connect 4 2.png" style="width: 400px" />
+ <img src="photos/connect 4 1.png" style="width: 400px" />
 </div>
 
 <b>Emmett's Connect 4 is an advanced, comprehensive Connect 4 player that includes:</b>
